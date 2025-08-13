@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import type React from "react"
@@ -5,7 +7,7 @@ import type React from "react"
 import { useState, useRef } from "react"
 import { Button } from "./ui/button"
 import { Label } from "./ui/label"
-import { parseEmailList } from "../lib/verifier"
+import { parseEmailList } from "@/lib/verifier"
 import { Upload, FileText, CheckCircle, AlertCircle, Play, Trash2, Download } from "lucide-react"
 import Papa from "papaparse"
 

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "./ui/button"
 import { Textarea } from "./ui/textarea"
 import { Label } from "./ui/label"
-import { parseEmailList } from "../lib/verifier"
+import { parseEmailList } from "@/lib/verifier"
 import { CheckCircle, Mail, Trash2, Play } from "lucide-react"
 
 interface EmailInputProps {

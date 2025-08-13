@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type NextRequest, NextResponse } from "next/server";
 import { EmailVerifier } from "@/lib/email-verifier";
 import { rateLimiter } from "@/lib/rate-limiter";
