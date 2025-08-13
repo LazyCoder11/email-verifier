@@ -161,15 +161,15 @@ export function EmailVerifier() {
         </div>
 
         {/* Rate Limit Warning */}
-        {rateLimitInfo.isLimited && (
+        {/* {rateLimitInfo.isLimited && (
           <Alert className="mb-4 border-amber-200 bg-amber-50">
             <AlertTriangle className="h-4 w-4 text-amber-600" />
             <AlertDescription className="text-amber-800">{rateLimitInfo.message}</AlertDescription>
           </Alert>
-        )}
+        )} */}
 
         {/* Rate Limit Info */}
-        {!rateLimitInfo.isLimited && rateLimitInfo.remaining !== undefined && (
+        {/* {!rateLimitInfo.isLimited && rateLimitInfo.remaining !== undefined && (
           <Alert className="mb-4 border-blue-200 bg-blue-50">
             <Zap className="h-4 w-4 text-blue-600" />
             <AlertDescription className="text-blue-800">
@@ -179,7 +179,7 @@ export function EmailVerifier() {
               )}
             </AlertDescription>
           </Alert>
-        )}
+        )} */}
 
         {/* Verification Error */}
         {verificationError && (

@@ -5,8 +5,8 @@ import { EmailVerifier } from "@/components/email-verifier";
 export default function Home() {
   return (
     <main className="min-h-screen py-8 px-4 relative">
-      <a href="https://pratikt.in" target="_blank" rel="noopener noreferrer" className="bg-green-200/50 border px-4 py-2 absolute right-8 bottom-8 border-green-500 rounded-md">
-        Built by Pratik Trivedi
+      <a href="https://pratikt.in" target="_blank" rel="noopener noreferrer" className="bg-green-200/50 border px-4 py-2 fixed right-8 bottom-8 border-green-500 rounded-md">
+        <code>Built by Pratik Trivedi</code>
       </a>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
