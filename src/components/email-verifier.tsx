@@ -9,6 +9,7 @@ import { ResultsTable } from "./results-table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
 import { Alert, AlertDescription } from "./ui/alert"
 import { AlertTriangle, Zap } from "lucide-react"
+import DarkVeil from "../../components/backgrounds/DarkVeil/DarkVeil"
 
 export interface VerificationResult {
   email: string
@@ -153,10 +154,10 @@ export function EmailVerifier() {
   }
 
   return (
-    <div className="space-y-6">
-      <Card className="p-6 shadow-lg border border-primary bg-white">
+    <div className="space-y-6 grid grid-cols-2 gap-10 relative">
+      <Card className="p-6 shadow-lg h-full border-none bg-white backdrop-blur-xl">
         <div className="border-l-4 border-green-500 pl-4 mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Input Emails</h2>
+          <h2 className="text-xl font-semibold">Input Emails</h2>
           <p className="text-sm text-gray-600">Add emails to verify using any of the methods below</p>
         </div>
 
@@ -217,7 +218,11 @@ export function EmailVerifier() {
         </Tabs>
       </Card>
 
-      {(results.length > 0 || isVerifying) && (
+      {results.length === 0 && !isVerifying ? (
+        <Card className="p-6 shadow-lg h-full border-none bg-white backdrop-blur-xl flex justify-center text-center text-gray-500">
+          Results will appear here
+        </Card>
+      ) : (
         <ResultsTable
           results={results}
           isVerifying={isVerifying}
@@ -225,6 +230,7 @@ export function EmailVerifier() {
           estimatedTimeRemaining={estimatedTimeRemaining}
         />
       )}
+
     </div>
   )
 }

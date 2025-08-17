@@ -111,7 +111,7 @@ export function ResultsTable({ results, isVerifying, progress, estimatedTimeRema
   const progressPercentage = progress.total > 0 ? (progress.processed / progress.total) * 100 : 0
 
   return (
-    <Card className="p-6 shadow-lg border border-primary bg-white">
+    <Card className="p-6 shadow-lg h-full border-none bg-white backdrop-blur-xl">
       <div className="border-l-4 border-green-500 pl-4 mb-6">
         <h2 className="text-xl font-semibold text-gray-900">Verification Results</h2>
         <p className="text-sm text-gray-600">

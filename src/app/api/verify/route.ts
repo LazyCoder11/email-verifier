@@ -5,6 +5,8 @@ import { EmailVerifier } from "@/lib/email-verifier";
 import { rateLimiter } from "@/lib/rate-limiter";
 import { parseEmailList } from "@/lib/verifier";
 
+export const runtime = "nodejs";
+
 // Configuration from environment variables
 const config = {
   smtpTimeout: Number.parseInt(process.env.SMTP_TIMEOUT_MS || "8000"),

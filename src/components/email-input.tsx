@@ -62,15 +62,15 @@ export function EmailInput({ emails, onEmailsChange, onVerify, onClear, isVerify
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="email-input" className="text-sm font-medium text-gray-700">
+        <Label htmlFor="email-input" className="text-sm font-medium">
           Email Addresses
         </Label>
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-gray-600">
           Enter one email per line, or separate with commas. Duplicates will be automatically removed.
         </p>
         <Textarea
           id="email-input"
-          placeholder="user@example.com&#10;test@domain.org&#10;another@company.net"
+          placeholder="user@example.com"
           value={inputValue}
           onChange={(e) => handleInputChange(e.target.value)}
           className="min-h-[120px] font-mono text-sm resize-y"
