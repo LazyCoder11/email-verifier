@@ -9,7 +9,6 @@ import { ResultsTable } from "./results-table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
 import { Alert, AlertDescription } from "./ui/alert"
 import { AlertTriangle, Zap } from "lucide-react"
-import DarkVeil from "../../components/backgrounds/DarkVeil/DarkVeil"
 
 export interface VerificationResult {
   email: string
