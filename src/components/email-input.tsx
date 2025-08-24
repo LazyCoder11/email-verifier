@@ -73,7 +73,7 @@ export function EmailInput({ emails, onEmailsChange, onVerify, onClear, isVerify
           placeholder="user@example.com"
           value={inputValue}
           onChange={(e) => handleInputChange(e.target.value)}
-          className="min-h-[120px] font-mono text-sm resize-y"
+          className="h-[220px] font-mono overflow-y-auto text-sm resize-y"
           disabled={isVerifying}
         />
       </div>

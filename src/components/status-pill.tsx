@@ -35,14 +35,13 @@ const statusConfig = {
 }
 
 export function StatusPill({ status, className }: StatusPillProps) {
-  const config = statusConfig[status]
+  const config = statusConfig[status] ?? statusConfig.unknown  // 👈 fallback to "unknown"
   const Icon = config.icon
 
   return (
     <span
       className={cn(
         "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border",
-        config.color,
         className,
       )}
     >

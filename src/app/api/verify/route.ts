@@ -176,3 +176,137 @@ export async function OPTIONS(request: NextRequest) {
     },
   });
 }
+
+// /* eslint-disable @typescript-eslint/no-explicit-any */
+// import { type NextRequest, NextResponse } from "next/server";
+// import { rateLimiter } from "@/lib/rate-limiter";
+// import { parseEmailList } from "@/lib/verifier";
+
+// export const runtime = "nodejs";
+
+// function getClientIP(request: NextRequest): string {
+//   const forwarded = request.headers.get("x-forwarded-for");
+//   if (forwarded) return forwarded.split(",")[0].trim();
+//   return (
+//     request.headers.get("x-real-ip") ||
+//     request.headers.get("cf-connecting-ip") ||
+//     "unknown"
+//   );
+// }
+
+// export async function POST(request: NextRequest) {
+//   try {
+//     const clientIP = getClientIP(request);
+
+//     // 🔒 Rate limiting
+//     if (!rateLimiter.isAllowed(clientIP)) {
+//       const resetTime = rateLimiter.getResetTime(clientIP);
+//       const remainingTime = Math.ceil((resetTime - Date.now()) / 1000 / 60);
+//       return NextResponse.json(
+//         {
+//           error: "Rate limit exceeded",
+//           message: `Too many requests. Try again in ${remainingTime} minutes.`,
+//           resetTime,
+//         },
+//         { status: 429 }
+//       );
+//     }
+
+//     // 📨 Parse request body
+//     const body = await request.json();
+//     if (!body.emails || !Array.isArray(body.emails)) {
+//       return NextResponse.json(
+//         { error: "Invalid request", message: "emails array is required" },
+//         { status: 400 }
+//       );
+//     }
+
+//     // ✨ Normalize + dedupe
+//     let emails: string[] = [];
+//     if (typeof body.emails[0] === "string" && body.emails.length === 1) {
+//       emails = parseEmailList(body.emails[0]);
+//     } else {
+//       emails = body.emails
+//         .filter((email: any) => typeof email === "string")
+//         .map((email: string) => email.trim().toLowerCase());
+//     }
+//     emails = [...new Set(emails)];
+
+//     if (emails.length === 0) {
+//       return NextResponse.json(
+//         { error: "No valid emails provided" },
+//         { status: 400 }
+//       );
+//     }
+
+//     // 🚀 Start timing
+//     const startTime = Date.now();
+
+//     // 🔥 Verify emails via NeverBounce API
+//     const results = await Promise.all(
+//       emails.map(async (email) => {
+//         try {
+//           const res = await fetch(
+//             `https://api.neverbounce.com/v4/single/check`
+//           );
+//           const data = await res.json();
+//           return {
+//             email,
+//             result: data.result || "unknown",
+//             flags: data.flags || [],
+//             raw: data,
+//           };
+//         } catch (err) {
+//           return { email, result: "error", error: (err as Error).message };
+//         }
+//       })
+//     );
+
+//     // ⏱ Calculate meta
+//     const totalTime = Date.now() - startTime;
+//     const avgTime = Math.round(totalTime / emails.length);
+
+//     // Rate limit headers
+//     const remaining = rateLimiter.getRemainingRequests(clientIP);
+//     const resetTime = rateLimiter.getResetTime(clientIP);
+
+//     return NextResponse.json(
+//       {
+//         results,
+//         meta: {
+//           totalEmails: emails.length,
+//           totalTimeMs: totalTime,
+//           averageTimeMs: avgTime,
+//         },
+//       },
+//       {
+//         headers: {
+//           "X-RateLimit-Limit": process.env.MAX_EMAILS_PER_REQUEST || "200",
+//           "X-RateLimit-Remaining": remaining.toString(),
+//           "X-RateLimit-Reset": resetTime.toString(),
+//         },
+//       }
+//     );
+//   } catch (error) {
+//     console.error("Verification error:", error);
+//     return NextResponse.json(
+//       {
+//         error: "Internal server error",
+//         message: "An error occurred during email verification",
+//       },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+// // Handle OPTIONS for CORS
+// export async function OPTIONS() {
+//   return new NextResponse(null, {
+//     status: 200,
+//     headers: {
+//       "Access-Control-Allow-Origin": "*",
+//       "Access-Control-Allow-Methods": "POST, OPTIONS",
+//       "Access-Control-Allow-Headers": "Content-Type",
+//     },
+//   });
+// }

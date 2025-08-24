@@ -154,32 +154,11 @@ export function EmailVerifier() {
 
   return (
     <div className="space-y-6 grid grid-cols-2 gap-10 relative">
-      <Card className="p-6 shadow-lg h-full border-none bg-white backdrop-blur-xl">
+      <Card className="p-6 shadow-lg h-fit border-none bg-white backdrop-blur-xl">
         <div className="border-l-4 border-green-500 pl-4 mb-6">
           <h2 className="text-xl font-semibold">Input Emails</h2>
           <p className="text-sm text-gray-600">Add emails to verify using any of the methods below</p>
         </div>
-
-        {/* Rate Limit Warning */}
-        {/* {rateLimitInfo.isLimited && (
-          <Alert className="mb-4 border-amber-200 bg-amber-50">
-            <AlertTriangle className="h-4 w-4 text-amber-600" />
-            <AlertDescription className="text-amber-800">{rateLimitInfo.message}</AlertDescription>
-          </Alert>
-        )} */}
-
-        {/* Rate Limit Info */}
-        {/* {!rateLimitInfo.isLimited && rateLimitInfo.remaining !== undefined && (
-          <Alert className="mb-4 border-blue-200 bg-blue-50">
-            <Zap className="h-4 w-4 text-blue-600" />
-            <AlertDescription className="text-blue-800">
-              {rateLimitInfo.remaining} verification requests remaining this hour.
-              {rateLimitInfo.resetTime && (
-                <span className="ml-1">Resets at {new Date(rateLimitInfo.resetTime).toLocaleTimeString()}.</span>
-              )}
-            </AlertDescription>
-          </Alert>
-        )} */}
 
         {/* Verification Error */}
         {verificationError && (

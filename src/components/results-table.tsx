@@ -144,8 +144,13 @@ export function ResultsTable({ results, isVerifying, progress, estimatedTimeRema
             <span>
               {progress.processed > 0 && (
                 <>
-                  Average: {Math.round(results.reduce((sum, r) => sum + r.details.timeTakenMs, 0) / results.length)}ms
-                  per email
+                  Average: {
+                    Math.round(
+                      results.reduce((sum, r) => sum + (r.details?.timeTakenMs ?? 0), 0) /
+                      (results.filter(r => r.details?.timeTakenMs !== undefined).length || 1)
+                    )
+                  }ms per email
+
                 </>
               )}
             </span>
@@ -156,27 +161,27 @@ export function ResultsTable({ results, isVerifying, progress, estimatedTimeRema
       {/* Statistics */}
       {results.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
-          <div className="text-center p-3 bg-gray-50 rounded-lg">
+          <div className="text-center p-3 border border-black bg-black/20 rounded-lg">
             <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
             <div className="text-xs text-gray-600">Total</div>
           </div>
-          <div className="text-center p-3 bg-green-50 rounded-lg">
+          <div className="text-center p-3 border border-green-300 bg-green-50 rounded-lg">
             <div className="text-2xl font-bold text-green-600">{stats.deliverable}</div>
             <div className="text-xs text-gray-600">Deliverable</div>
           </div>
-          <div className="text-center p-3 bg-red-50 rounded-lg">
+          <div className="text-center p-3 border border-red-300 bg-red-50 rounded-lg">
             <div className="text-2xl font-bold text-red-600">{stats.notDeliverable}</div>
             <div className="text-xs text-gray-600">Not Deliverable</div>
           </div>
-          <div className="text-center p-3 bg-amber-50 rounded-lg">
+          <div className="text-center p-3 border border-amber-300 bg-amber-50 rounded-lg">
             <div className="text-2xl font-bold text-amber-600">{stats.disposable}</div>
             <div className="text-xs text-gray-600">Disposable</div>
           </div>
-          <div className="text-center p-3 bg-gray-50 rounded-lg">
+          <div className="text-center p-3 border border-gray-300 bg-gray-50 rounded-lg">
             <div className="text-2xl font-bold text-gray-600">{stats.invalid}</div>
             <div className="text-xs text-gray-600">Invalid</div>
           </div>
-          <div className="text-center p-3 bg-blue-50 rounded-lg">
+          <div className="text-center p-3 border border-blue-300 bg-blue-50 rounded-lg">
             <div className="text-2xl font-bold text-blue-600">{stats.unknown}</div>
             <div className="text-xs text-gray-600">Unknown</div>
           </div>
@@ -219,8 +224,8 @@ export function ResultsTable({ results, isVerifying, progress, estimatedTimeRema
       {/* Results Table */}
       {filteredResults.length > 0 && (
         <div className="border rounded-lg overflow-hidden">
-          <Table>
-            <TableHeader>
+          <Table className="h-[220px] overflow-y-scroll">
+            <TableHeader className="sticky">
               <TableRow className="bg-gray-50">
                 {/* <TableHead className="w-12"></TableHead> */}
                 <TableHead>Email Address</TableHead>
@@ -229,7 +234,7 @@ export function ResultsTable({ results, isVerifying, progress, estimatedTimeRema
                 <TableHead className="w-12"></TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
+            <TableBody className="">
               {filteredResults.map((result, index) => (
                 <TableRow className="group" key={index}>
                   {/* <TableCell>
@@ -255,7 +260,7 @@ export function ResultsTable({ results, isVerifying, progress, estimatedTimeRema
                   <TableCell className="text-right text-sm text-gray-600">
                     <div className="flex items-center justify-end gap-1">
                       <Clock className="h-3 w-3" />
-                      {result.details.timeTakenMs}
+                      {result.details?.timeTakenMs ?? "N/A"}
                     </div>
                   </TableCell>
                   <TableCell>
